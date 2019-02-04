@@ -21,4 +21,9 @@ router.get(
   })
 );
 
+// callback route for google sign in
+router.get("/google/redirect", (req, res) => {
+  res.send("you reached callback uri");
+});
+
 module.exports = router;
