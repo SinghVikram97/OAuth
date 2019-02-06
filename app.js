@@ -1,41 +1,43 @@
 const express = require("express");
-const authRoutes = require("./routes/auth-routes");
-const mongoose = require("mongoose");
-const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const authRoutes = require("./routes/auth-routes");
+const profileRoutes = require("./routes/profile-routes");
+const passportSetup = require("./config/passport-setup");
+const mongoose = require("mongoose");
+const keys = require("./config/keys");
 
 const app = express();
 
-// Set up a view engine
+// set view engine
 app.set("view engine", "ejs");
 
-// Cookie session
+// set up session cookies
 app.use(
   cookieSession({
-    // Takes time in milisecond
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
   })
 );
 
-// intialize passport
+// initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect to mongodb
+// connect to mongodb
 mongoose.connect(keys.mongodb.dbURI, () => {
   console.log("connected to mongodb");
 });
 
-// Set up routes
+// set up routes
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 
-// Create home route
+// create home route
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { user: req.user });
 });
 
 app.listen(4444, () => {
-  console.log("Server started at http://localhost:4444");
+  console.log("app now listening for requests on port 4444");
 });

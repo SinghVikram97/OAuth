@@ -33,7 +33,8 @@ passport.use(
           // passport callback function
           new User({
             username: profile.displayName,
-            googleId: profile.id
+            googleId: profile.id,
+            thumnail: profile._json.image.url
           })
             .save()
             .then(newUser => {
