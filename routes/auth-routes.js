@@ -22,7 +22,7 @@ router.get(
 );
 
 // callback route for google sign in
-router.get("/google/redirect", (req, res) => {
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.send("you reached callback uri");
 });
 

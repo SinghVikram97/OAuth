@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
     "ejs": "^2.6.1",
     "eslint-plugin-prettier": "^3.0.1",
     "express": "^4.16.4",
+    "mongoose": "^5.4.9",
     "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-google-oauth2": "^0.1.6",
